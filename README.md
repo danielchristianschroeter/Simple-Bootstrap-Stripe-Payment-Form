@@ -3,7 +3,9 @@ Simple-Bootstrap-Stripe-Payment-Form
 
 Simple Stripe payment form in Bootstrap, field validation and user friendly country selection (from bootstrap formhelper)
 
+
 Used Components
+===============
 
 => jQuery (v1.11.0) - http://jquery.com/
 
