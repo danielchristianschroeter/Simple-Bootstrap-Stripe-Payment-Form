@@ -1,7 +1,7 @@
 Simple-Bootstrap-Stripe-Payment-Form
 ====================================
 
-Simple Stripe example payment form designed in Bootstrap.
+Simple Bootstrap Stripe example payment form.
 
 Features
 ===============
