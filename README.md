@@ -2,7 +2,7 @@ Simple-Bootstrap-Stripe-Payment-Form
 ====================================
 
 Simple Bootstrap Stripe example payment form.
-Replace "<Stripe Publishable Key>" & "<Stripe Secret Key>" in index.php if you want to test it.
+Replace "Stripe Publishable Key" & "Stripe Secret Key" in index.php if you want to test it.
 
 Suggestions for improvements are always welcome. GitHub pull requests are even better!
 
