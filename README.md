@@ -5,8 +5,11 @@ Simple Stripe payment form in Bootstrap, field validation and user friendly coun
 
 Features
 ===============
-* Validation
-* 
+* Form validation
+* Generate Token via Stripe JS
+* Responsive design
+* Warning if JavaScript is disabled
+* Charge single amounts with Stripe
 
 Used Components
 ===============
