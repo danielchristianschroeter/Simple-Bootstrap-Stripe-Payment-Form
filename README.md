@@ -6,6 +6,8 @@ Replace "Stripe Publishable Key" & "Stripe Secret Key" in index.php if you want 
 
 Suggestions for improvements are always welcome. GitHub pull requests are even better!
 
+Build by Daniel Schröter
+
 Features
 ===============
 * Form validation
