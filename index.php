@@ -112,6 +112,7 @@ $(document).ready(function() {
                 }
             },
 			cardnumber: {
+		selector: '#cardnumber',
                 validators: {
                     notEmpty: {
                         message: 'The credit card number is required and can\'t be empty'
@@ -188,6 +189,7 @@ $(document).ready(function() {
                 }
             },
 			cvv: {
+		selector: '#cvv',
                 validators: {
                     notEmpty: {
                         message: 'The cvv is required and can\'t be empty'
@@ -342,7 +344,7 @@ if ($_POST) {
     <div class="form-group">
       <label class="col-sm-4 control-label" for="textinput">Card Number</label>
       <div class="col-sm-6">
-        <input type="text" name="cardnumber" maxlength="19" placeholder="Card Number" class="card-number form-control">
+        <input type="text" id="cardnumber" maxlength="19" placeholder="Card Number" class="card-number form-control">
       </div>
     </div>
     
@@ -384,7 +386,7 @@ if ($_POST) {
     <div class="form-group">
       <label class="col-sm-4 control-label" for="textinput">CVV/CVV2</label>
       <div class="col-sm-3">
-        <input type="text" name="cvv" placeholder="CVV" maxlength="4" class="card-cvc form-control">
+        <input type="text" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc form-control">
       </div>
     </div>
     
