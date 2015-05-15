@@ -328,6 +328,7 @@ if ($_POST) {
       <input type="text" name="email" maxlength="65" placeholder="Email" class="email form-control">
     </div>
   </div>
+  </fieldset>
   <fieldset>
     <legend>Card Details</legend>
     
