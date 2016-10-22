@@ -244,11 +244,12 @@ $(document).ready(function() {
   </noscript>
   <?php
 require 'lib/Stripe.php';
- 
+
+$error = '';
+$success = '';
+	  
 if ($_POST) {
   Stripe::setApiKey("<Stripe Secret Key>");
-  $error = '';
-  $success = '';
 
   try {
 	if (empty($_POST['street']) || empty($_POST['city']) || empty($_POST['zip']))
