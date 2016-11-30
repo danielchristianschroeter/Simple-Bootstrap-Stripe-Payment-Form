@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/bootstrap-min.css">
 <link rel="stylesheet" href="css/bootstrap-formhelpers-min.css" media="screen">
 <link rel="stylesheet" href="css/bootstrapValidator-min.css"/>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
 <link rel="stylesheet" href="css/bootstrap-side-notes.css" />
 <style type="text/css">
 .col-centered {
