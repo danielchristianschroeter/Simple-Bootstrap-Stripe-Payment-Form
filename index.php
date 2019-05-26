@@ -205,7 +205,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
             // this identifies your website in the createToken call below
-            Stripe.setPublishableKey('<Stripe Publishable Key>');
+            Stripe.setPublishableKey('pk_test_xxx');
  
             function stripeResponseHandler(status, response) {
                 if (response.error) {
@@ -249,17 +249,21 @@ $error = '';
 $success = '';
 	  
 if ($_POST) {
-  Stripe::setApiKey("<Stripe Secret Key>");
+  \Stripe\Stripe::setApiKey("sk_test_xxx");
 
   try {
 	if (empty($_POST['street']) || empty($_POST['city']) || empty($_POST['zip']))
       throw new Exception("Fill out all required fields.");
     if (!isset($_POST['stripeToken']))
       throw new Exception("The Stripe Token was not generated correctly");
-    Stripe_Charge::create(array("amount" => 3000,
-                                "currency" => "eur",
-                                "card" => $_POST['stripeToken'],
-								"description" => $_POST['email']));
+				
+	\Stripe\Charge::create([
+	  "amount" => 3000,
+	  "currency" => "eur",
+	  "source"   => $_POST['stripeToken'], // obtained with Stripe.js
+	  "description" => $_POST['email']
+	]);
+								
     $success = '<div class="alert alert-success">
                 <strong>Success!</strong> Your payment was successful.
 				</div>';

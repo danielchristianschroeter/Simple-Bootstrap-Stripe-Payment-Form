@@ -1,39 +1,57 @@
 <?php
 
-class Stripe_BalanceTransaction extends Stripe_ApiResource
+namespace Stripe;
+
+/**
+ * Class BalanceTransaction
+ *
+ * @property string $id
+ * @property string $object
+ * @property int $amount
+ * @property int $available_on
+ * @property int $created
+ * @property string $currency
+ * @property string $description
+ * @property int $fee
+ * @property mixed $fee_details
+ * @property int $net
+ * @property string $source
+ * @property mixed $sourced_transfers
+ * @property string $status
+ * @property string $type
+ *
+ * @package Stripe
+ */
+class BalanceTransaction extends ApiResource
 {
-  /**
-   * @param string $class Ignored.
-   *
-   * @return string The class URL for this resource. It needs to be special
-   *    cased because it doesn't fit into the standard resource pattern.
-   */
-  public static function classUrl($class)
-  {
-    return "/v1/balance/history";
-  }
+    /**
+     * @return string The class URL for this resource. It needs to be special
+     *    cased because it doesn't fit into the standard resource pattern.
+     */
+    public static function classUrl()
+    {
+        return "/v1/balance/history";
+    }
 
-  /**
-   * @param string $id The ID of the balance transaction to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_BalanceTransaction
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the balance transaction to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return BalanceTransaction
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_BalanceTransactions.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of BalanceTransactions
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 }

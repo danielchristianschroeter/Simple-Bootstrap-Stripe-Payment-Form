@@ -1,58 +1,77 @@
 <?php
 
-class Stripe_InvoiceItem extends Stripe_ApiResource
+namespace Stripe;
+
+/**
+ * Class InvoiceItem
+ *
+ * @package Stripe
+ */
+class InvoiceItem extends ApiResource
 {
-  /**
-   * @param string $id The ID of the invoice item to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_InvoiceItem
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the invoice item to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return InvoiceItem
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_InvoiceItems.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of InvoiceItems
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return Stripe_InvoiceItem The created invoice item.
-   */
-  public static function create($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedCreate($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return InvoiceItem The created invoice item.
+     */
+    public static function create($params = null, $opts = null)
+    {
+        return self::_create($params, $opts);
+    }
 
-  /**
-   * @return Stripe_InvoiceItem The saved invoice item.
-   */
-  public function save()
-  {
-    $class = get_class();
-    return self::_scopedSave($class);
-  }
+    /**
+     * @param string $id The ID of the invoice item to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return InvoiceItem The updated invoice item.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
+    }
 
-  /**
-   * @return Stripe_InvoiceItem The deleted invoice item.
-   */
-  public function delete($params=null)
-  {
-    $class = get_class();
-    return self::_scopedDelete($class, $params);
-  }
+    /**
+     * @param array|string|null $opts
+     *
+     * @return InvoiceItem The saved invoice item.
+     */
+    public function save($opts = null)
+    {
+        return $this->_save($opts);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return InvoiceItem The deleted invoice item.
+     */
+    public function delete($params = null, $opts = null)
+    {
+        return $this->_delete($params, $opts);
+    }
 }
