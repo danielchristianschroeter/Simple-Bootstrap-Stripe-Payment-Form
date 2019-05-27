@@ -1,60 +1,77 @@
 <?php
 
-class Stripe_Plan extends Stripe_ApiResource
+namespace Stripe;
+
+/**
+ * Class Plan
+ *
+ * @package Stripe
+ */
+class Plan extends ApiResource
 {
-  /**
-   * @param string $id The ID of the plan to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Plan
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the plan to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return Plan
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Plan The created plan.
-   */
-  public static function create($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedCreate($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Plan The created plan.
+     */
+    public static function create($params = null, $opts = null)
+    {
+        return self::_create($params, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @return Stripe_Plan The deleted plan.
-   */
-  public function delete($params=null)
-  {
-    $class = get_class();
-    return self::_scopedDelete($class, $params);
-  }
-  
-  /**
-   * @return Stripe_Plan The saved plan.
-   */
-  public function save()
-  {
-    $class = get_class();
-    return self::_scopedSave($class);
-  }
-  
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_Plans.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the plan to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Plan The updated plan.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Plan The deleted plan.
+     */
+    public function delete($params = null, $opts = null)
+    {
+        return $this->_delete($params, $opts);
+    }
+
+    /**
+     * @param array|string|null $opts
+     *
+     * @return Plan The saved plan.
+     */
+    public function save($opts = null)
+    {
+        return $this->_save($opts);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of Plans
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 }

@@ -1,75 +1,92 @@
 <?php
 
-class Stripe_Invoice extends Stripe_ApiResource
+namespace Stripe;
+
+/**
+ * Class Invoice
+ *
+ * @package Stripe
+ */
+class Invoice extends ApiResource
 {
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Invoice The created invoice.
-   */
-  public static function create($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedCreate($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Invoice The created invoice.
+     */
+    public static function create($params = null, $opts = null)
+    {
+        return self::_create($params, $opts);
+    }
 
-  /**
-   * @param string $id The ID of the invoice to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Invoice
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the invoice to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return Invoice
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_Invoices.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of Invoices
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Invoice The upcoming invoice.
-   */
-  public static function upcoming($params=null, $apiKey=null)
-  {
-    $requestor = new Stripe_ApiRequestor($apiKey);
-    $url = self::classUrl(get_class()) . '/upcoming';
-    list($response, $apiKey) = $requestor->request('get', $url, $params);
-    return Stripe_Util::convertToStripeObject($response, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the invoice to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Invoice The updated invoice.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
+    }
 
-  /**
-   * @return Stripe_Invoice The saved invoice.
-   */
-  public function save()
-  {
-    $class = get_class();
-    return self::_scopedSave($class);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Invoice The upcoming invoice.
+     */
+    public static function upcoming($params = null, $opts = null)
+    {
+        $url = static::classUrl() . '/upcoming';
+        list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
+        $obj = Util\Util::convertToStripeObject($response->json, $opts);
+        $obj->setLastResponse($response);
+        return $obj;
+    }
 
-  /**
-   * @return Stripe_Invoice The paid invoice.
-   */
-  public function pay()
-  {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
-    $url = $this->instanceUrl() . '/pay';
-    list($response, $apiKey) = $requestor->request('post', $url);
-    $this->refreshFrom($response, $apiKey);
-    return $this;
-  }
+    /**
+     * @param array|string|null $opts
+     *
+     * @return Invoice The saved invoice.
+     */
+    public function save($opts = null)
+    {
+        return $this->_save($opts);
+    }
+
+    /**
+     * @return Invoice The paid invoice.
+     */
+    public function pay($opts = null)
+    {
+        $url = $this->instanceUrl() . '/pay';
+        list($response, $opts) = $this->_request('post', $url, null, $opts);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
 }

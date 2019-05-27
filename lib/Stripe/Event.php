@@ -1,28 +1,43 @@
 <?php
 
-class Stripe_Event extends Stripe_ApiResource
-{
-  /**
-   * @param string $id The ID of the event to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Event
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+namespace Stripe;
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_Events.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+/**
+ * Class Event
+ *
+ * @property string $id
+ * @property string $object
+ * @property string $api_version
+ * @property int $created
+ * @property mixed $data
+ * @property bool $livemode
+ * @property int $pending_webhooks
+ * @property string $request
+ * @property string $type
+ *
+ * @package Stripe
+ */
+class Event extends ApiResource
+{
+    /**
+     * @param string $id The ID of the event to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return Event
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
+
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of Events
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 }

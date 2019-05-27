@@ -1,157 +1,190 @@
 <?php
 
-class Stripe_Customer extends Stripe_ApiResource
+namespace Stripe;
+
+/**
+ * Class Customer
+ *
+ * @property string $id
+ * @property string $object
+ * @property int $account_balance
+ * @property string $business_vat_id
+ * @property string $created
+ * @property string $currency
+ * @property string $default_source
+ * @property bool $delinquent
+ * @property string $description
+ * @property mixed $discount
+ * @property string $email
+ * @property bool $livemode
+ * @property array $metadata
+ * @property mixed $shipping
+ * @property Collection $sources
+ * @property Collection $subscriptions
+ *
+ * @package Stripe
+ */
+class Customer extends ApiResource
 {
-  /**
-   * @param string $id The ID of the customer to retrieve.
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Customer
-   */
-  public static function retrieve($id, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedRetrieve($class, $id, $apiKey);
-  }
+    /**
+     * @param string $id The ID of the customer to retrieve.
+     * @param array|string|null $opts
+     *
+     * @return Customer
+     */
+    public static function retrieve($id, $opts = null)
+    {
+        return self::_retrieve($id, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return array An array of Stripe_Customers.
-   */
-  public static function all($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedAll($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Collection of Customers
+     */
+    public static function all($params = null, $opts = null)
+    {
+        return self::_all($params, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   * @param string|null $apiKey
-   *
-   * @return Stripe_Customer The created customer.
-   */
-  public static function create($params=null, $apiKey=null)
-  {
-    $class = get_class();
-    return self::_scopedCreate($class, $params, $apiKey);
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Customer The created customer.
+     */
+    public static function create($params = null, $opts = null)
+    {
+        return self::_create($params, $opts);
+    }
 
-  /**
-   * @returns Stripe_Customer The saved customer.
-   */
-  public function save()
-  {
-    $class = get_class();
-    return self::_scopedSave($class);
-  }
+    /**
+     * @param string $id The ID of the customer to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Customer The updated customer.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns Stripe_Customer The deleted customer.
-   */
-  public function delete($params=null)
-  {
-    $class = get_class();
-    return self::_scopedDelete($class, $params);
-  }
+    /**
+     * @param array|string|null $opts
+     *
+     * @return Customer The saved customer.
+     */
+    public function save($opts = null)
+    {
+        return $this->_save($opts);
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns Stripe_InvoiceItem The resulting invoice item.
-   */
-  public function addInvoiceItem($params=null)
-  {
-    if (!$params)
-      $params = array();
-    $params['customer'] = $this->id;
-    $ii = Stripe_InvoiceItem::create($params, $this->_apiKey);
-    return $ii;
-  }
+    /**
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return Customer The deleted customer.
+     */
+    public function delete($params = null, $opts = null)
+    {
+        return $this->_delete($params, $opts);
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns array An array of the customer's Stripe_Invoices.
-   */
-  public function invoices($params=null)
-  {
-    if (!$params)
-      $params = array();
-    $params['customer'] = $this->id;
-    $invoices = Stripe_Invoice::all($params, $this->_apiKey);
-    return $invoices;
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return InvoiceItem The resulting invoice item.
+     */
+    public function addInvoiceItem($params = null)
+    {
+        if (!$params) {
+            $params = array();
+        }
+        $params['customer'] = $this->id;
+        $ii = InvoiceItem::create($params, $this->_opts);
+        return $ii;
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns array An array of the customer's Stripe_InvoiceItems.
-   */
-  public function invoiceItems($params=null)
-  {
-    if (!$params)
-      $params = array();
-    $params['customer'] = $this->id;
-    $iis = Stripe_InvoiceItem::all($params, $this->_apiKey);
-    return $iis;
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return array An array of the customer's Invoices.
+     */
+    public function invoices($params = null)
+    {
+        if (!$params) {
+            $params = array();
+        }
+        $params['customer'] = $this->id;
+        $invoices = Invoice::all($params, $this->_opts);
+        return $invoices;
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns array An array of the customer's Stripe_Charges.
-   */
-  public function charges($params=null)
-  {
-    if (!$params)
-      $params = array();
-    $params['customer'] = $this->id;
-    $charges = Stripe_Charge::all($params, $this->_apiKey);
-    return $charges;
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return array An array of the customer's InvoiceItems.
+     */
+    public function invoiceItems($params = null)
+    {
+        if (!$params) {
+            $params = array();
+        }
+        $params['customer'] = $this->id;
+        $iis = InvoiceItem::all($params, $this->_opts);
+        return $iis;
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns Stripe_Subscription The updated subscription.
-   */
-  public function updateSubscription($params=null)
-  {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
-    $url = $this->instanceUrl() . '/subscription';
-    list($response, $apiKey) = $requestor->request('post', $url, $params);
-    $this->refreshFrom(array('subscription' => $response), $apiKey, true);
-    return $this->subscription;
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return array An array of the customer's Charges.
+     */
+    public function charges($params = null)
+    {
+        if (!$params) {
+            $params = array();
+        }
+        $params['customer'] = $this->id;
+        $charges = Charge::all($params, $this->_opts);
+        return $charges;
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns Stripe_Subscription The cancelled subscription.
-   */
-  public function cancelSubscription($params=null)
-  {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
-    $url = $this->instanceUrl() . '/subscription';
-    list($response, $apiKey) = $requestor->request('delete', $url, $params);
-    $this->refreshFrom(array('subscription' => $response), $apiKey, true);
-    return $this->subscription;
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return Subscription The updated subscription.
+     */
+    public function updateSubscription($params = null)
+    {
+        $url = $this->instanceUrl() . '/subscription';
+        list($response, $opts) = $this->_request('post', $url, $params);
+        $this->refreshFrom(array('subscription' => $response), $opts, true);
+        return $this->subscription;
+    }
 
-  /**
-   * @param array|null $params
-   *
-   * @returns Stripe_Customer The updated customer.
-   */
-  public function deleteDiscount()
-  {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
-    $url = $this->instanceUrl() . '/discount';
-    list($response, $apiKey) = $requestor->request('delete', $url);
-    $this->refreshFrom(array('discount' => null), $apiKey, true);
-  }
+    /**
+     * @param array|null $params
+     *
+     * @return Subscription The cancelled subscription.
+     */
+    public function cancelSubscription($params = null)
+    {
+        $url = $this->instanceUrl() . '/subscription';
+        list($response, $opts) = $this->_request('delete', $url, $params);
+        $this->refreshFrom(array('subscription' => $response), $opts, true);
+        return $this->subscription;
+    }
+
+    /**
+     * @return Customer The updated customer.
+     */
+    public function deleteDiscount()
+    {
+        $url = $this->instanceUrl() . '/discount';
+        list($response, $opts) = $this->_request('delete', $url);
+        $this->refreshFrom(array('discount' => null), $opts, true);
+    }
 }
