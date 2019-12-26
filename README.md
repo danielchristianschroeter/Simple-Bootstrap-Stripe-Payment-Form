@@ -1,5 +1,6 @@
 Simple-Bootstrap-Stripe-Payment-Form
 ====================================
+IMPORTANT NOTICE: This implementation is outdated and is no longer maintainted. I do not provide any support! Check out https://jsfiddle.net/user/ywain/fiddles/ or https://stripe.com/docs/payments/payment-intents for SCA ready examples.
 
 Simple Bootstrap Stripe example payment form.
 Replace "Stripe Publishable Key" & "Stripe Secret Key" in index.php if you want to test it.
